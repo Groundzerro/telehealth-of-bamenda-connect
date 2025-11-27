@@ -35,4 +35,5 @@ jobs:
       - name: Terraform plan
         env:
           TF_VAR_aws_region: us-west-2  # or your actual region, must match terraform.tfvars
+          TF_VAR_connect_instance_id: ${{ secrets.CONNECT_INSTANCE_ID }}
         run: terraform plan -input=false
