@@ -23,6 +23,15 @@ output "security_profile_id" {
 output "agent_ids" {
   description = "Map of agent usernames to user_ids"
   value = {
-    for u in aws_connect_user.telehealth_agents : u.username => u.user_id
+    for username, u in aws_connect_user.telehealth_agents :
+    username => u.user_id
   }
 }
+
+
+# output "agent_ids" {
+#   description = "Map of agent usernames to user_ids"
+#   value = {
+#     for u in aws_connect_user.telehealth_agents : u.username => u.user_id
+#   }
+# }
