@@ -1,0 +1,108 @@
+{
+  "Version": "2019-10-30",
+  "StartAction": "9f32a1a6-9381-470c-a29f-cf3e1845c406",
+  "Metadata": {
+    "entryPointPosition": {
+      "x": -58.4,
+      "y": -40
+    },
+    "ActionMetadata": {
+      "9553bf90-6364-498d-ac81-c728300765a5": {
+        "position": {
+          "x": 832.8,
+          "y": 130.4
+        }
+      },
+      "5115c44e-6146-4b25-b72b-6a494e5c25c5": {
+        "position": {
+          "x": 576,
+          "y": 74.4
+        }
+      },
+      "9f32a1a6-9381-470c-a29f-cf3e1845c406": {
+        "position": {
+          "x": 38.4,
+          "y": 75.2
+        }
+      },
+      "1dce5e57-8574-40d4-897e-eb0f6cf40cd2": {
+        "position": {
+          "x": 296,
+          "y": 76
+        },
+        "parameters": {
+          "QueueId": {
+            "displayName": "telehealth-of-bamenda-dev-Doctor-Consult"
+          }
+        },
+        "queue": {
+          "text": "telehealth-of-bamenda-dev-Doctor-Consult"
+        }
+      }
+    },
+    "Annotations": [],
+    "name": "telehealth_transfer_to_queue_flow",
+    "description": "",
+    "type": "queueTransfer",
+    "status": "PUBLISHED",
+    "hash": {}
+  },
+  "Actions": [
+    {
+      "Parameters": {},
+      "Identifier": "9553bf90-6364-498d-ac81-c728300765a5",
+      "Type": "DisconnectParticipant",
+      "Transitions": {}
+    },
+    {
+      "Parameters": {},
+      "Identifier": "5115c44e-6146-4b25-b72b-6a494e5c25c5",
+      "Type": "TransferContactToQueue",
+      "Transitions": {
+        "NextAction": "9553bf90-6364-498d-ac81-c728300765a5",
+        "Errors": [
+          {
+            "NextAction": "9553bf90-6364-498d-ac81-c728300765a5",
+            "ErrorType": "QueueAtCapacity"
+          },
+          {
+            "NextAction": "9553bf90-6364-498d-ac81-c728300765a5",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {
+        "Text": "You are now being transferred to ..."
+      },
+      "Identifier": "9f32a1a6-9381-470c-a29f-cf3e1845c406",
+      "Type": "MessageParticipant",
+      "Transitions": {
+        "NextAction": "1dce5e57-8574-40d4-897e-eb0f6cf40cd2",
+        "Errors": [
+          {
+            "NextAction": "1dce5e57-8574-40d4-897e-eb0f6cf40cd2",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {
+        "QueueId": "arn:aws:connect:us-west-2:789070729972:instance/5d253be2-f961-4d07-a04d-f9e36e6b5a7b/queue/66dfefd0-6e02-46a1-96f6-f21d69b10c1f"
+      },
+      "Identifier": "1dce5e57-8574-40d4-897e-eb0f6cf40cd2",
+      "Type": "UpdateContactTargetQueue",
+      "Transitions": {
+        "NextAction": "5115c44e-6146-4b25-b72b-6a494e5c25c5",
+        "Errors": [
+          {
+            "NextAction": "5115c44e-6146-4b25-b72b-6a494e5c25c5",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    }
+  ]
+}

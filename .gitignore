@@ -16,3 +16,7 @@ terraform.tfvars
 *.tfplan
 plan.out
 plan.txt
+
+# IDE
+.vscode/
+.idea/
