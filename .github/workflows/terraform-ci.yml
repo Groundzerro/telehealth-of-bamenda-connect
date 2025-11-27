@@ -10,6 +10,16 @@ jobs:
   terraform-ci:
     runs-on: ubuntu-latest
 
+    # Needed so GitHub can request an ID token for OIDC
+    permissions:
+      id-token: write
+      contents: read
+
+    # These env vars map to Terraform variables
+    env:
+      TF_VAR_aws_region: us-west-2  # or your region
+      TF_VAR_connect_instance_id: ${{ secrets.CONNECT_INSTANCE_ID }}
+
     defaults:
       run:
         working-directory: .
@@ -17,6 +27,12 @@ jobs:
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
+
+      - name: Configure AWS credentials via OIDC
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: arn:aws:iam::789070729972:role/TerraformGitHubTelehealthRole
+          aws-region: us-west-2  # same as your backend region
 
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v3
@@ -33,7 +49,53 @@ jobs:
         run: terraform validate
 
       - name: Terraform plan
-        env:
-          TF_VAR_aws_region: us-west-2  # or your actual region, must match terraform.tfvars
-          TF_VAR_connect_instance_id: ${{ secrets.CONNECT_INSTANCE_ID }}
         run: terraform plan -input=false
+
+
+
+# name: Terraform CI
+
+# on:
+#   push:
+#     branches: [ main ]
+#   pull_request:
+#     branches: [ main ]
+
+# jobs:
+#   terraform-ci:
+#     runs-on: ubuntu-latest
+
+#     defaults:
+#       run:
+#         working-directory: .
+
+#     env:
+#       TF_VAR_aws_region: us-west-2
+#       TF_VAR_connect_instance_id: ${{ secrets.CONNECT_INSTANCE_ID }}
+
+#     steps:
+#       - name: Checkout repo
+#         uses: actions/checkout@v4
+
+#       - name: Configure AWS credentials via OIDC
+#         uses: aws-actions/configure-aws-credentials@v4
+#         with:
+#           role-to-assume: arn:aws:iam::5d253be2-f961-4d07-a04d-f9e36e6b5a7b:role/TerraformGitHubTelehealthRole
+#           aws-region: us-west-2
+
+#       - name: Setup Terraform
+#         uses: hashicorp/setup-terraform@v3
+#         with:
+#           terraform_version: 1.8.5
+
+#       - name: Terraform fmt
+#         run: terraform fmt -check
+
+#       - name: Terraform init
+#         run: terraform init -input=false
+
+#       - name: Terraform validate
+#         run: terraform validate
+
+#       - name: Terraform plan
+#         run: terraform plan -input=false
