@@ -1,0 +1,49 @@
+name: Terraform CD
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch: {}
+
+jobs:
+  deploy:
+    name: Terraform Deploy (apply)
+    runs-on: ubuntu-latest
+
+    # Required for GitHub OIDC → AWS
+    permissions:
+      id-token: write
+      contents: read
+
+    # These map directly to Terraform variables
+    env:
+      TF_VAR_aws_region: us-west-2                       # <-- your region
+      TF_VAR_connect_instance_id: ${{ secrets.CONNECT_INSTANCE_ID }}
+
+    defaults:
+      run:
+        working-directory: .
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Configure AWS credentials via OIDC
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: arn:aws:iam::789070729972:role/TerraformGitHubTelehealthRole
+          aws-region: us-west-2                          # <-- same as your backend region
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: 1.8.5
+
+      - name: Terraform init
+        run: terraform init -input=false
+
+      - name: Terraform plan
+        run: terraform plan -input=false
+
+      - name: Terraform apply
+        run: terraform apply -input=false -auto-approve
