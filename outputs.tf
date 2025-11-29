@@ -36,6 +36,41 @@ output "quick_connect_ids" {
   value       = module.quick_connects.quick_connect_ids
 }
 
+output "agent_hold_flow_id" {
+  description = "Agent hold flow ID"
+  value       = module.contact_flows.agent_hold_flow_id
+}
+
+output "agent_whisper_flow_id" {
+  description = "Agent whisper flow ID"
+  value       = module.contact_flows.agent_whisper_flow_id
+}
+
+output "pre_queue_flow_id" {
+  description = "Pre-queue contact flow ID"
+  value       = module.contact_flows.pre_queue_flow_id
+}
+
+output "customer_queue_flow_id" {
+  description = "Customer queue flow ID"
+  value       = module.contact_flows.customer_queue_flow_id
+}
+
+output "customer_hold_flow_id" {
+  description = "Customer hold flow ID"
+  value       = module.contact_flows.customer_hold_flow_id
+}
+
+output "customer_whisper_flow_id" {
+  description = "Customer whisper flow ID"
+  value       = module.contact_flows.customer_whisper_flow_id
+}
+
+output "helpdesk_flow_id" {
+  description = "Helpdesk contact flow ID"
+  value       = module.contact_flows.helpdesk_flow_id
+}
+
 
 
 # ########################################

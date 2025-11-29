@@ -1,0 +1,316 @@
+{
+  "Version": "2019-10-30",
+  "StartAction": "813cdab7-c946-46bb-aee8-17ef6b3f8ea9",
+  "Metadata": {
+    "entryPointPosition": {
+      "x": -281.6,
+      "y": 14.4
+    },
+    "ActionMetadata": {
+      "813cdab7-c946-46bb-aee8-17ef6b3f8ea9": {
+        "position": {
+          "x": -132.8,
+          "y": 69.6
+        },
+        "parameters": {
+          "EventHooks": {
+            "AgentWhisper": {
+              "displayName": "Default agent whisper"
+            }
+          }
+        },
+        "contactFlow": {
+          "text": "Default agent whisper",
+          "id": "arn:aws:connect:us-west-2:789070729972:instance/5d253be2-f961-4d07-a04d-f9e36e6b5a7b/contact-flow/8bba22d7-df24-4eef-9684-7a8a051a96c3"
+        },
+        "customerOrAgent": false
+      },
+      "129be172-1a70-4af5-8623-5e2a474d3c4f": {
+        "position": {
+          "x": -115.2,
+          "y": 308.8
+        },
+        "parameters": {
+          "EventHooks": {
+            "AgentHold": {
+              "displayName": "Default agent hold"
+            }
+          }
+        },
+        "contactFlow": {
+          "text": "Default agent hold",
+          "id": "arn:aws:connect:us-west-2:789070729972:instance/5d253be2-f961-4d07-a04d-f9e36e6b5a7b/contact-flow/8f0299ac-f185-42d5-bac5-700cf4f16d28"
+        },
+        "customerOrAgent": false
+      },
+      "0ffe6293-c746-442b-8cac-6c1222a17e98": {
+        "position": {
+          "x": 155.2,
+          "y": 64.8
+        },
+        "parameters": {
+          "EventHooks": {
+            "CustomerWhisper": {
+              "displayName": "Default customer whisper"
+            }
+          }
+        },
+        "contactFlow": {
+          "text": "Default customer whisper",
+          "id": "arn:aws:connect:us-west-2:789070729972:instance/5d253be2-f961-4d07-a04d-f9e36e6b5a7b/contact-flow/07867b1a-6a2e-4b0c-872f-8fc8cd5b471c"
+        },
+        "customerOrAgent": true
+      },
+      "e144b3f4-e221-4ea8-8079-05c78f3f4036": {
+        "position": {
+          "x": 185.6,
+          "y": 320.8
+        },
+        "parameters": {
+          "EventHooks": {
+            "CustomerHold": {
+              "displayName": "Default customer hold"
+            }
+          }
+        },
+        "contactFlow": {
+          "text": "Default customer hold",
+          "id": "arn:aws:connect:us-west-2:789070729972:instance/5d253be2-f961-4d07-a04d-f9e36e6b5a7b/contact-flow/48d954be-60e2-49be-9a8d-2de504d7c33f"
+        },
+        "customerOrAgent": true
+      },
+      "93d1a556-cd82-448f-94fb-5e488f01b68e": {
+        "position": {
+          "x": 501.6,
+          "y": 308.8
+        },
+        "parameters": {
+          "EventHooks": {
+            "CustomerQueue": {
+              "displayName": "Default customer queue"
+            }
+          }
+        },
+        "contactFlow": {
+          "text": "Default customer queue",
+          "id": "arn:aws:connect:us-west-2:789070729972:instance/5d253be2-f961-4d07-a04d-f9e36e6b5a7b/contact-flow/5d12f0c0-01ac-48f3-a309-8346785ad7ee"
+        },
+        "customerOrAgent": true
+      },
+      "4e97380a-3a1c-47f0-9a94-2b348743716a": {
+        "position": {
+          "x": 785.6,
+          "y": 296
+        }
+      },
+      "6fdad2f6-a913-49a8-87c2-4e5ad388fed7": {
+        "position": {
+          "x": 1035.2,
+          "y": 319.2
+        }
+      },
+      "4ee30ed8-32c5-4327-b7c9-1d054f5e8d27": {
+        "position": {
+          "x": 1297.6,
+          "y": 284
+        }
+      },
+      "3e7d6c83-3965-4988-80bb-789de85916b2": {
+        "position": {
+          "x": 1579.2,
+          "y": 298.4
+        }
+      }
+    },
+    "Annotations": [],
+    "name": "pre_queue_flow",
+    "description": "",
+    "type": "contactFlow",
+    "status": "PUBLISHED",
+    "hash": {}
+  },
+  "Actions": [
+    {
+      "Parameters": {
+        "EventHooks": {
+          "AgentWhisper": "arn:aws:connect:us-west-2:789070729972:instance/5d253be2-f961-4d07-a04d-f9e36e6b5a7b/contact-flow/8bba22d7-df24-4eef-9684-7a8a051a96c3"
+        },
+        "EventHooksConfiguration": {
+          "AgentWhisper": {
+            "DisableExecution": "false"
+          }
+        }
+      },
+      "Identifier": "813cdab7-c946-46bb-aee8-17ef6b3f8ea9",
+      "Type": "UpdateContactEventHooks",
+      "Transitions": {
+        "NextAction": "129be172-1a70-4af5-8623-5e2a474d3c4f",
+        "Errors": [
+          {
+            "NextAction": "129be172-1a70-4af5-8623-5e2a474d3c4f",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {
+        "EventHooks": {
+          "AgentHold": "arn:aws:connect:us-west-2:789070729972:instance/5d253be2-f961-4d07-a04d-f9e36e6b5a7b/contact-flow/8f0299ac-f185-42d5-bac5-700cf4f16d28"
+        }
+      },
+      "Identifier": "129be172-1a70-4af5-8623-5e2a474d3c4f",
+      "Type": "UpdateContactEventHooks",
+      "Transitions": {
+        "NextAction": "0ffe6293-c746-442b-8cac-6c1222a17e98",
+        "Errors": [
+          {
+            "NextAction": "0ffe6293-c746-442b-8cac-6c1222a17e98",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {
+        "EventHooks": {
+          "CustomerWhisper": "arn:aws:connect:us-west-2:789070729972:instance/5d253be2-f961-4d07-a04d-f9e36e6b5a7b/contact-flow/07867b1a-6a2e-4b0c-872f-8fc8cd5b471c"
+        },
+        "EventHooksConfiguration": {
+          "CustomerWhisper": {
+            "DisableExecution": "false"
+          }
+        }
+      },
+      "Identifier": "0ffe6293-c746-442b-8cac-6c1222a17e98",
+      "Type": "UpdateContactEventHooks",
+      "Transitions": {
+        "NextAction": "e144b3f4-e221-4ea8-8079-05c78f3f4036",
+        "Errors": [
+          {
+            "NextAction": "e144b3f4-e221-4ea8-8079-05c78f3f4036",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {
+        "EventHooks": {
+          "CustomerHold": "arn:aws:connect:us-west-2:789070729972:instance/5d253be2-f961-4d07-a04d-f9e36e6b5a7b/contact-flow/48d954be-60e2-49be-9a8d-2de504d7c33f"
+        }
+      },
+      "Identifier": "e144b3f4-e221-4ea8-8079-05c78f3f4036",
+      "Type": "UpdateContactEventHooks",
+      "Transitions": {
+        "NextAction": "93d1a556-cd82-448f-94fb-5e488f01b68e",
+        "Errors": [
+          {
+            "NextAction": "93d1a556-cd82-448f-94fb-5e488f01b68e",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {
+        "EventHooks": {
+          "CustomerQueue": "arn:aws:connect:us-west-2:789070729972:instance/5d253be2-f961-4d07-a04d-f9e36e6b5a7b/contact-flow/5d12f0c0-01ac-48f3-a309-8346785ad7ee"
+        }
+      },
+      "Identifier": "93d1a556-cd82-448f-94fb-5e488f01b68e",
+      "Type": "UpdateContactEventHooks",
+      "Transitions": {
+        "NextAction": "4e97380a-3a1c-47f0-9a94-2b348743716a",
+        "Errors": [
+          {
+            "NextAction": "4e97380a-3a1c-47f0-9a94-2b348743716a",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {},
+      "Identifier": "4e97380a-3a1c-47f0-9a94-2b348743716a",
+      "Type": "GetMetricData",
+      "Transitions": {
+        "NextAction": "6fdad2f6-a913-49a8-87c2-4e5ad388fed7",
+        "Errors": [
+          {
+            "NextAction": "6fdad2f6-a913-49a8-87c2-4e5ad388fed7",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {
+        "RecordingBehavior": {
+          "RecordedParticipants": [
+            "Agent",
+            "Customer"
+          ],
+          "IVRRecordingBehavior": "Enabled"
+        },
+        "AnalyticsBehavior": {
+          "Enabled": "True",
+          "AnalyticsLanguage": "en-US",
+          "AnalyticsRedactionBehavior": "Enabled",
+          "AnalyticsRedactionResults": "RedactedAndOriginal",
+          "AnalyticsRedactionMaskMode": "EntityType",
+          "AnalyticsRedactionEntities": [
+            "SSN"
+          ],
+          "ChannelConfiguration": {
+            "Chat": {
+              "AnalyticsModes": []
+            },
+            "Voice": {
+              "AnalyticsModes": [
+                "RealTime"
+              ]
+            }
+          },
+          "SummaryConfiguration": {
+            "SummaryModes": [
+              "PostContact"
+            ]
+          },
+          "SentimentConfiguration": {
+            "Enabled": "True"
+          }
+        }
+      },
+      "Identifier": "6fdad2f6-a913-49a8-87c2-4e5ad388fed7",
+      "Type": "UpdateContactRecordingBehavior",
+      "Transitions": {
+        "NextAction": "4ee30ed8-32c5-4327-b7c9-1d054f5e8d27"
+      }
+    },
+    {
+      "Parameters": {},
+      "Identifier": "4ee30ed8-32c5-4327-b7c9-1d054f5e8d27",
+      "Type": "TransferContactToQueue",
+      "Transitions": {
+        "NextAction": "3e7d6c83-3965-4988-80bb-789de85916b2",
+        "Errors": [
+          {
+            "NextAction": "3e7d6c83-3965-4988-80bb-789de85916b2",
+            "ErrorType": "QueueAtCapacity"
+          },
+          {
+            "NextAction": "3e7d6c83-3965-4988-80bb-789de85916b2",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {},
+      "Identifier": "3e7d6c83-3965-4988-80bb-789de85916b2",
+      "Type": "DisconnectParticipant",
+      "Transitions": {}
+    }
+  ]
+}

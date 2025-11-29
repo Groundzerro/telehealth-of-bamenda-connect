@@ -1,0 +1,114 @@
+{
+  "Version": "2019-10-30",
+  "StartAction": "ad69d8e3-ad48-4b5d-b89b-3193db385fb5",
+  "Metadata": {
+    "entryPointPosition": {
+      "x": 1112,
+      "y": -54.4
+    },
+    "ActionMetadata": {
+      "ad69d8e3-ad48-4b5d-b89b-3193db385fb5": {
+        "position": {
+          "x": 1320.8,
+          "y": 13.6
+        }
+      },
+      "74392ba0-2220-4a8f-8b8d-7f30fb18d591": {
+        "position": {
+          "x": 2240,
+          "y": 33.6
+        }
+      },
+      "5b433d16-ee0f-4800-80e2-fb72bb2d0947": {
+        "position": {
+          "x": 1660,
+          "y": 21.6
+        },
+        "parameters": {
+          "QueueId": {
+            "displayName": "BasicQueue"
+          }
+        },
+        "queue": {
+          "text": "BasicQueue"
+        }
+      },
+      "407fe11d-cd26-425d-a439-ee8e762f8aba": {
+        "position": {
+          "x": 1931.2,
+          "y": 20
+        },
+        "parameters": {
+          "ContactFlowId": {
+            "displayName": "Sample queue customer"
+          }
+        },
+        "ContactFlow": {
+          "text": "Sample queue customer"
+        }
+      }
+    },
+    "Annotations": [],
+    "name": "helpdesk_flow",
+    "description": "",
+    "type": "contactFlow",
+    "status": "PUBLISHED",
+    "hash": {}
+  },
+  "Actions": [
+    {
+      "Parameters": {
+        "Text": "Welcome to the helpdesk line. An agent will be with you shortly."
+      },
+      "Identifier": "ad69d8e3-ad48-4b5d-b89b-3193db385fb5",
+      "Type": "MessageParticipant",
+      "Transitions": {
+        "NextAction": "5b433d16-ee0f-4800-80e2-fb72bb2d0947",
+        "Errors": [
+          {
+            "NextAction": "5b433d16-ee0f-4800-80e2-fb72bb2d0947",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {},
+      "Identifier": "74392ba0-2220-4a8f-8b8d-7f30fb18d591",
+      "Type": "DisconnectParticipant",
+      "Transitions": {}
+    },
+    {
+      "Parameters": {
+        "QueueId": "arn:aws:connect:us-west-2:789070729972:instance/5d253be2-f961-4d07-a04d-f9e36e6b5a7b/queue/6441345f-6d5c-4bf4-80c8-587113a975ca"
+      },
+      "Identifier": "5b433d16-ee0f-4800-80e2-fb72bb2d0947",
+      "Type": "UpdateContactTargetQueue",
+      "Transitions": {
+        "NextAction": "407fe11d-cd26-425d-a439-ee8e762f8aba",
+        "Errors": [
+          {
+            "NextAction": "407fe11d-cd26-425d-a439-ee8e762f8aba",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    },
+    {
+      "Parameters": {
+        "ContactFlowId": "arn:aws:connect:us-west-2:789070729972:instance/5d253be2-f961-4d07-a04d-f9e36e6b5a7b/contact-flow/034dcb0c-41b8-4a9c-89fe-68d70a29aa6d"
+      },
+      "Identifier": "407fe11d-cd26-425d-a439-ee8e762f8aba",
+      "Type": "TransferToFlow",
+      "Transitions": {
+        "NextAction": "74392ba0-2220-4a8f-8b8d-7f30fb18d591",
+        "Errors": [
+          {
+            "NextAction": "74392ba0-2220-4a8f-8b8d-7f30fb18d591",
+            "ErrorType": "NoMatchingError"
+          }
+        ]
+      }
+    }
+  ]
+}
