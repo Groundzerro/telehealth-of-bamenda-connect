@@ -17,6 +17,14 @@ terraform.tfvars
 plan.out
 plan.txt
 
+# Bootstrap state
+bootstrap/terraform.tfstate
+bootstrap/terraform.tfstate.*
+bootstrap/.terraform/
+bootstrap/.terraform.lock.hcl
+bootstrap/terraform.tfvars
+
+
 # IDE
 .vscode/
 .idea/
