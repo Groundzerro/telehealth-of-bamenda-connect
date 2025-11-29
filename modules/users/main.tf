@@ -5,6 +5,18 @@ resource "aws_connect_user" "this" {
     a.username => a
   }
 
+  # 🚦 SAFETY NET: never destroy a user accidentally
+  lifecycle {
+    prevent_destroy = true
+
+    # Optional but recommended:
+    # Don't try to rotate password from Terraform every time you tweak it in the console.
+    ignore_changes = [
+      password
+    ]
+  }
+
+
   # Core identifiers
   instance_id = var.instance_id
 

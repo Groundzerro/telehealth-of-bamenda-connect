@@ -116,6 +116,13 @@ variable "agents" {
       email    = "doctor1@example.com"
       first    = "Doctor"
       last     = "One"
+    },
+
+    {
+      username = "pharmacist1"
+      email    = "pharmacist1@example.com"
+      first    = "Pharmacist"
+      last     = "One"
     }
   ]
 }
