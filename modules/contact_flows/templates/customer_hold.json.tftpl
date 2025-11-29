@@ -1,0 +1,56 @@
+{
+  "Version": "2019-10-30",
+  "StartAction": "Music",
+  "Metadata": {
+    "entryPointPosition": {
+      "x": 40,
+      "y": 40
+    },
+    "ActionMetadata": {
+      "Music": {
+        "position": {
+          "x": 172.8,
+          "y": 172
+        },
+        "isFriendlyName": true,
+        "parameters": {
+          "Messages": [
+            {
+              "PromptId": {
+                "displayName": "CustomerHold.wav"
+              }
+            }
+          ]
+        },
+        "audio": [
+          {
+            "id": "arn:aws:connect:us-west-2:789070729972:instance/5d253be2-f961-4d07-a04d-f9e36e6b5a7b/prompt/4241316a-7fad-43aa-9337-1c12fabdd4f6",
+            "text": "CustomerHold.wav",
+            "type": "Prompt"
+          }
+        ]
+      }
+    },
+    "Annotations": [],
+    "name": "customer_hold_flow",
+    "description": "",
+    "type": "customerHold",
+    "status": "PUBLISHED",
+    "hash": {}
+  },
+  "Actions": [
+    {
+      "Parameters": {
+        "Messages": [
+          {
+            "PromptId": "arn:aws:connect:us-west-2:789070729972:instance/5d253be2-f961-4d07-a04d-f9e36e6b5a7b/prompt/4241316a-7fad-43aa-9337-1c12fabdd4f6"
+          }
+        ],
+        "ContinueMessagingDuringInterrupt": "false"
+      },
+      "Identifier": "Music",
+      "Type": "MessageParticipantIteratively",
+      "Transitions": {}
+    }
+  ]
+}

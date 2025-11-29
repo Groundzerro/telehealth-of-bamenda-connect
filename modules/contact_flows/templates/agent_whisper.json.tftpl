@@ -1,0 +1,71 @@
+{
+  "Version": "2019-10-30",
+  "StartAction": "8e24e286-07a0-4238-bba7-cc4bdaee835f",
+  "Metadata": {
+    "entryPointPosition": {
+      "x": 40,
+      "y": 40
+    },
+    "ActionMetadata": {
+      "8e24e286-07a0-4238-bba7-cc4bdaee835f": {
+        "position": {
+          "x": 195.2,
+          "y": 152.8
+        }
+      },
+      "Beep": {
+        "position": {
+          "x": 461.6,
+          "y": 242.4
+        },
+        "isFriendlyName": true,
+        "parameters": {
+          "PromptId": {
+            "displayName": "CustomerHold.wav"
+          }
+        },
+        "promptName": "CustomerHold.wav"
+      },
+      "a95962cd-e39b-4725-b702-fbfc4f3de8f0": {
+        "position": {
+          "x": 837.6,
+          "y": 238.4
+        }
+      }
+    },
+    "Annotations": [],
+    "name": "agent_whisper_flow",
+    "description": "",
+    "type": "agentWhisper",
+    "status": "PUBLISHED",
+    "hash": {}
+  },
+  "Actions": [
+    {
+      "Parameters": {
+        "Text": "You have a caller waiting on the line."
+      },
+      "Identifier": "8e24e286-07a0-4238-bba7-cc4bdaee835f",
+      "Type": "MessageParticipant",
+      "Transitions": {
+        "NextAction": "Beep"
+      }
+    },
+    {
+      "Parameters": {
+        "PromptId": "arn:aws:connect:us-west-2:789070729972:instance/5d253be2-f961-4d07-a04d-f9e36e6b5a7b/prompt/4241316a-7fad-43aa-9337-1c12fabdd4f6"
+      },
+      "Identifier": "Beep",
+      "Type": "MessageParticipant",
+      "Transitions": {
+        "NextAction": "a95962cd-e39b-4725-b702-fbfc4f3de8f0"
+      }
+    },
+    {
+      "Parameters": {},
+      "Identifier": "a95962cd-e39b-4725-b702-fbfc4f3de8f0",
+      "Type": "EndFlowExecution",
+      "Transitions": {}
+    }
+  ]
+}
