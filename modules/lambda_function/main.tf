@@ -1,26 +1,38 @@
-data "aws_iam_policy_document" "assume_role" {
-  statement {
-    actions = ["sts:AssumeRole"]
+############################################################
+# modules/lambda_function/main.tf
+############################################################
 
-    principals {
-      type        = "service"
-      identifiers = ["lambda.amazonaws.com"]
-    }
-  }
-}
-
+# IAM Role for Lambda
 resource "aws_iam_role" "this" {
-  name               = "${var.function_name}-role"
-  assume_role_policy = data.aws_iam_policy_document.assume_role.json
-  tags               = var.tags
+  name = "${var.function_name}-role"
+
+  # Trust policy: allow Lambda service to assume this role
+  assume_role_policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Effect = "Allow"
+        Principal = {
+          Service = "lambda.amazonaws.com"
+        }
+        Action = "sts:AssumeRole"
+      }
+    ]
+  })
+
+  tags = var.tags
 }
+
+############################################################
+# Basic CloudWatch Logs policy for this Lambda
+############################################################
 
 data "aws_iam_policy_document" "base_logs" {
   statement {
     actions = [
       "logs:CreateLogGroup",
       "logs:CreateLogStream",
-      "logs:PutLogEvents"
+      "logs:PutLogEvents",
     ]
 
     resources = ["*"]
@@ -38,7 +50,10 @@ resource "aws_iam_role_policy_attachment" "base_logs_attach" {
   policy_arn = aws_iam_policy.base_logs.arn
 }
 
-# Optional extra permissions (DynamoDB, Connect metrics, etc.)
+############################################################
+# Extra permissions (e.g., DynamoDB, Connect metrics)
+############################################################
+
 data "aws_iam_policy_document" "extra" {
   dynamic "statement" {
     for_each = var.policy_statements
@@ -72,12 +87,19 @@ resource "aws_iam_role_policy_attachment" "extra_attach" {
   policy_arn = aws_iam_policy.extra[0].arn
 }
 
-# Package code
+############################################################
+# Package the Lambda code
+############################################################
+
 data "archive_file" "zip" {
   type        = "zip"
   source_dir  = var.source_path
   output_path = "${path.module}/build/${var.function_name}.zip"
 }
+
+############################################################
+# Lambda Function
+############################################################
 
 resource "aws_lambda_function" "this" {
   function_name = var.function_name
