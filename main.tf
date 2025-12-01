@@ -112,6 +112,113 @@ module "dynamodb_prompts" {
   }
 }
 
+############################
+# Lambda get_prompt
+############################
+module "lambda_get_prompt" {
+  source        = "./modules/lambda_function"
+  function_name = "${var.project_name}-${var.environment}-get-prompt"
+  description   = "Get a single Tele-Health prompt from DynamoDB"
+
+  source_path = "${path.module}/lambda/get_prompt"
+
+  environment = {
+    PROMPTS_TABLE_NAME = module.dynamodb_prompts.table_name
+  }
+
+  policy_statements = [
+    {
+      actions   = ["dynamodb:GetItem"]
+      resources = [module.dynamodb_prompts.table_arn]
+    }
+  ]
+
+  tags = {
+    Project     = var.project_name
+    Environment = var.environment
+    Purpose     = "TelehealthGetPrompt"
+  }
+}
+
+
+############################
+# Lambda get prompts batch
+############################
+
+module "lambda_get_prompts_batch" {
+  source        = "./modules/lambda_function"
+  function_name = "${var.project_name}-${var.environment}-get-prompts-batch"
+  description   = "Get multiple Tele-Health prompts from DynamoDB"
+
+  source_path = "${path.module}/lambda/get_prompts_batch"
+
+  environment = {
+    PROMPTS_TABLE_NAME = module.dynamodb_prompts.table_name
+  }
+
+  policy_statements = [
+    {
+      actions   = ["dynamodb:GetItem", "dynamodb:BatchGetItem", "dynamodb:Query", "dynamodb:Scan"]
+      resources = [module.dynamodb_prompts.table_arn]
+    }
+  ]
+
+  tags = {
+    Project     = var.project_name
+    Environment = var.environment
+    Purpose     = "TelehealthGetPromptsBatch"
+  }
+}
+
+
+############################
+# Lambda EWT Metrics
+############################
+
+module "lambda_ewt_metrics" {
+  source        = "./modules/lambda_function"
+  function_name = "${var.project_name}-${var.environment}-ewt-metrics"
+  description   = "Compute estimated wait time for Tele-Health queues"
+
+  source_path = "${path.module}/lambda/ewt_metrics"
+
+  environment = {
+    CONNECT_INSTANCE_ID = var.connect_instance_id
+  }
+
+  policy_statements = [
+    {
+      actions = [
+        "connect:GetCurrentMetricData",
+        "connect:GetMetricDataV2"
+      ]
+      resources = ["*"] # You can narrow this later to your instance ARN
+    }
+  ]
+
+  tags = {
+    Project     = var.project_name
+    Environment = var.environment
+    Purpose     = "TelehealthEWT"
+  }
+}
+
+resource "aws_connect_lambda_function_association" "get_prompt" {
+  instance_id  = var.connect_instance_id
+  function_arn = module.lambda_get_prompt.function_arn
+}
+
+resource "aws_connect_lambda_function_association" "get_prompts_batch" {
+  instance_id  = var.connect_instance_id
+  function_arn = module.lambda_get_prompts_batch.function_arn
+}
+
+resource "aws_connect_lambda_function_association" "ewt_metrics" {
+  instance_id  = var.connect_instance_id
+  function_arn = module.lambda_ewt_metrics.function_arn
+}
+
+
 
 ################################################################
 
