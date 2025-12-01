@@ -71,6 +71,16 @@ output "helpdesk_flow_id" {
   value       = module.contact_flows.helpdesk_flow_id
 }
 
+output "prompts_table_name" {
+  description = "DynamoDB table name for Tele-Health prompts"
+  value       = module.dynamodb_prompts.table_name
+}
+
+output "prompts_table_arn" {
+  description = "DynamoDB table ARN for Tele-Health prompts"
+  value       = module.dynamodb_prompts.table_arn
+}
+
 
 
 # ########################################

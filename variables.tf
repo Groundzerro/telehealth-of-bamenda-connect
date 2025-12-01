@@ -27,6 +27,13 @@ variable "business_hours_timezone" {
   default     = "America/Chicago"
 }
 
+variable "prompts_table_name" {
+  description = "Name of the DynamoDB table for Tele-Health prompts"
+  type        = string
+  default     = null
+}
+
+
 variable "business_hours" {
   description = "Map of days to opening/closing hours in 24h clock"
   type = map(object({

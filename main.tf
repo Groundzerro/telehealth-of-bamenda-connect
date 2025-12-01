@@ -1,6 +1,8 @@
 locals {
-  name_prefix = "${var.project_name}-${var.environment}"
+  name_prefix        = "${var.project_name}-${var.environment}"
+  prompts_table_name = "${replace(var.project_name, "/[^a-zA-Z0-9_-]/", "")}_${var.environment}_prompts"
 }
+
 
 ############################
 # Hours of Operation
@@ -95,6 +97,23 @@ module "quick_connects" {
   queues           = module.queues.queues
   transfer_flow_id = module.contact_flows.queue_transfer_flow_id
 }
+
+
+############################
+# DynamoDB Prompts
+############################
+module "dynamodb_prompts" {
+  source     = "./modules/dynamodb_prompts"
+  table_name = local.prompts_table_name
+
+  tags = {
+    Project     = var.project_name
+    Environment = var.environment
+  }
+}
+
+
+################################################################
 
 
 # module "quick_connects" {
